@@ -21,7 +21,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed fields, an empty array for none allowed, or null to allow all fields.
      */
-    protected $allowedSortParameters = [];
+    protected $allowedSortParameters = ['title', 'content'];
 
     /**
      * The filters a client is allowed send.
@@ -29,7 +29,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed filters, an empty array for none allowed, or null to allow all.
      */
-    protected $allowedFilteringParameters = [];
+    protected $allowedFilteringParameters = ['title', 'content', 'year', 'month', 'search'];
 
     /**
      * Get resource validation rules.
@@ -58,5 +58,4 @@ class Validators extends AbstractValidators
             //
         ];
     }
-
 }

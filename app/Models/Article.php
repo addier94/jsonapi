@@ -11,8 +11,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    public $allowedSorts = ['title', 'content'];
-
     protected $guarded = [];
 
     protected $casts = [
