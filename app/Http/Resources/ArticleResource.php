@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ResourceObject extends JsonResource
+class ArticleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,15 @@ class ResourceObject extends JsonResource
     public function toArray($request)
     {
         return [
-            'type' => $this->resource->type,
+            'type' => 'articles',
             'id' => (string) $this->resource->getRouteKey(),
-            'attributes' => $this->resource->fields(),
+            'attributes' => [
+                'title' => $this->resource->title,
+                'slug' => $this->resource->slug,
+                'content' => $this->resource->content,
+            ],
             'links' => [
-                'self' => route('api.v1.' . $this->resource->type . '.show', $this->resource)
+                'self' => route('api.v1.articles.show', $this->resource)
             ]
         ];
     }

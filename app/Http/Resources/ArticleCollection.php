@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection as BaseResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ResourceCollection extends BaseResourceCollection
+class ArticleCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,7 @@ class ResourceCollection extends BaseResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => ResourceObject::collection($this->collection),
+            'data' => ArticleResource::collection($this->collection),
         ];
     }
 }

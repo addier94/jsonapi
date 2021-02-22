@@ -11,8 +11,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    public $type = 'articles';
-
     public $allowedSorts = ['title', 'content'];
 
     protected $guarded = [];
@@ -22,15 +20,6 @@ class Article extends Model
         'category_id' => 'integer',
         'user_id' => 'integer',
     ];
-
-    public function fields()
-    {
-        return [
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'content' => $this->content,
-        ];
-    }
 
     public function category()
     {
