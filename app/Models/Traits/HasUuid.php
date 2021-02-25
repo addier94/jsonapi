@@ -11,6 +11,11 @@ trait HasUuid
     return false;
   }
 
+  public function getKeyType()
+  {
+    return 'string';
+  }
+
   protected static function bootHasUuid() // magit methods for booted
   {
     static::creating(function ($model) {

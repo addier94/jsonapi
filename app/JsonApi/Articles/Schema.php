@@ -33,8 +33,18 @@ class Schema extends SchemaProvider
             'title' => $article->title,
             'slug' => $article->slug,
             'content' => $article->content,
-            'createdAt' => $article->created_at,
-            'updatedAt' => $article->updated_at,
+            'createdAt' => $article->created_at->toAtomString(),
+            'updatedAt' => $article->updated_at->toAtomString(),
+        ];
+    }
+    public function getRelationships($article, $isPrimary, array $includeRelationships)
+    {
+        return [
+            'authors' => [
+                'data' => function () use ($article) {
+                    return $article->user;
+                }
+            ]
         ];
     }
 }
