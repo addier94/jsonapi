@@ -3,6 +3,7 @@
 namespace Tests\Feature\Authors;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,8 +16,13 @@ class ListAuthorsTest extends TestCase
     {
         $authors = User::factory()->create();
 
-        $this->jsonApi()->get(route('api.v1.authors.read', $authors))
+        $response = $this->jsonApi()->get(route('api.v1.authors.read', $authors))
             ->assertSee($authors->name);
+
+        $this->assertTrue(
+            Str::isUuid($response->json('data.id')),
+            "The authors 'id' must be Uuid."
+        );
     }
     /** @test */
     public function can_fetch_all_authors()
