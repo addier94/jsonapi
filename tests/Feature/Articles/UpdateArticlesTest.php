@@ -29,15 +29,13 @@ class UpdateArticlesTest extends TestCase
         Sanctum::actingAs($article->user);
 
         $this->jsonApi()
-            ->content([
-                'data' => [
-                    'type' => 'articles',
-                    'id' => $article->getRouteKey(),
-                    'attributes' => [
-                        'title' => 'Title changed',
-                        'slug' => 'title-changed',
-                        'content' => 'Content changed',
-                    ]
+            ->withData([
+                'type' => 'articles',
+                'id' => $article->getRouteKey(),
+                'attributes' => [
+                    'title' => 'Title changed',
+                    'slug' => 'title-changed',
+                    'content' => 'Content changed',
                 ]
             ])
             ->patch(route('api.v1.articles.update', $article))
@@ -57,15 +55,13 @@ class UpdateArticlesTest extends TestCase
         Sanctum::actingAs(User::factory()->create());
 
         $this->jsonApi()
-            ->content([
-                'data' => [
-                    'type' => 'articles',
-                    'id' => $article->getRouteKey(),
-                    'attributes' => [
-                        'title' => 'Title changed',
-                        'slug' => 'title-changed',
-                        'content' => 'Content changed',
-                    ]
+            ->withData([
+                'type' => 'articles',
+                'id' => $article->getRouteKey(),
+                'attributes' => [
+                    'title' => 'Title changed',
+                    'slug' => 'title-changed',
+                    'content' => 'Content changed',
                 ]
             ])
             ->patch(route('api.v1.articles.update', $article))
@@ -85,13 +81,11 @@ class UpdateArticlesTest extends TestCase
         Sanctum::actingAs($article->user);
 
         $this->jsonApi()
-            ->content([
-                'data' => [
-                    'type' => 'articles',
-                    'id' => $article->getRouteKey(),
-                    'attributes' => [
-                        'title' => 'Title changed',
-                    ]
+            ->withData([
+                'type' => 'articles',
+                'id' => $article->getRouteKey(),
+                'attributes' => [
+                    'title' => 'Title changed',
                 ]
             ])
             ->patch(route('api.v1.articles.update', $article))
@@ -109,13 +103,11 @@ class UpdateArticlesTest extends TestCase
         Sanctum::actingAs($article->user);
 
         $this->jsonApi()
-            ->content([
-                'data' => [
-                    'type' => 'articles',
-                    'id' => $article->getRouteKey(),
-                    'attributes' => [
-                        'slug' => 'slug-changed',
-                    ]
+            ->withData([
+                'type' => 'articles',
+                'id' => $article->getRouteKey(),
+                'attributes' => [
+                    'slug' => 'slug-changed',
                 ]
             ])
             ->patch(route('api.v1.articles.update', $article))
