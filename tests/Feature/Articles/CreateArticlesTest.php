@@ -17,11 +17,9 @@ class CreateArticlesTest extends TestCase
     {
         $article = array_filter(Article::factory()->raw(['user_id' => null]));
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))->assertStatus(401);
 
         $this->assertDatabaseMissing('articles', $article);
@@ -37,11 +35,9 @@ class CreateArticlesTest extends TestCase
         // $this->actingAs($user);
         Sanctum::actingAs($user);
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))->assertCreated();
         $this->assertDatabaseHas('articles', [
             'user_id' => $user->id,
@@ -57,11 +53,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertStatus(422)
             ->assertSee('data\/attributes\/title');
@@ -75,11 +69,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertStatus(422)
             ->assertSee('data\/attributes\/content');
@@ -93,11 +85,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertStatus(422)
             ->assertSee('data\/attributes\/slug');
@@ -113,11 +103,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertStatus(422)
             ->assertSee('data\/attributes\/slug');
@@ -131,11 +119,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertStatus(422)
             ->assertSee('data\/attributes\/slug');
@@ -149,11 +135,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertSee(trans('validation.no_underscores', ['attribute' => 'slug']))
             ->assertStatus(422)
@@ -168,11 +152,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertSee(trans('validation.no_starting_dashes', ['attribute' => 'slug']))
             ->assertStatus(422)
@@ -187,11 +169,9 @@ class CreateArticlesTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create());
 
-        $this->jsonApi()->content([
-            'data' => [
-                'type' => 'articles',
-                'attributes' => $article
-            ]
+        $this->jsonApi()->withData([
+            'type' => 'articles',
+            'attributes' => $article
         ])->post(route('api.v1.articles.create'))
             ->assertSee(trans('validation.no_ending_dashes', ['attribute' => 'slug']))
             ->assertStatus(422)
