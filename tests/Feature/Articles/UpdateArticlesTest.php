@@ -3,6 +3,7 @@
 namespace Tests\Feature\Articles;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -25,8 +26,9 @@ class UpdateArticlesTest extends TestCase
     public function authenticated_users_can_update_their_articles()
     {
         $article = Article::factory()->create();
+        $category = Category::factory()->create();
 
-        Sanctum::actingAs($article->user);
+        Sanctum::actingAs($user = $article->user);
 
         $this->jsonApi()
             ->withData([
@@ -36,6 +38,20 @@ class UpdateArticlesTest extends TestCase
                     'title' => 'Title changed',
                     'slug' => 'title-changed',
                     'content' => 'Content changed',
+                ],
+                'relationships' => [
+                    'authors' => [
+                        'data' => [
+                            'id' => $user->getRouteKey(),
+                            'type' => 'authors'
+                        ]
+                    ],
+                    'categories' => [
+                        'data' => [
+                            'id' => $category->getRouteKey(),
+                            'type' => 'categories'
+                        ]
+                    ]
                 ]
             ])
             ->patch(route('api.v1.articles.update', $article))

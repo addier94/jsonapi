@@ -55,6 +55,11 @@ class Validators extends AbstractValidators
                 Rule::unique('articles')->ignore($record)
             ],
             'content' => ['required'],
+            'authors' => [
+                Rule::requiredIf(!$record),
+                // 'required',
+                new HasOne('authors')
+            ],
             'categories' => [
                 // 'required',
                 Rule::requiredIf(!$record),
