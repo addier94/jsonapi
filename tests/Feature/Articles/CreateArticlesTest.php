@@ -32,7 +32,8 @@ class CreateArticlesTest extends TestCase
         $category = Category::factory()->create();
 
         $article = array_filter(Article::factory()->raw([
-            'category_id' => null
+            'category_id' => null,
+            'approved' => true // mas assigment check
         ]));
 
         $this->assertDatabaseMissing('articles', $article);
